@@ -1311,7 +1311,30 @@
         color: rgba(244, 240, 230, 0.72);
       }
 
+      .mobile-nav { display: none; }
+
       @media (max-width: 900px) {
+        .hero-grid,
+        .section-head,
+        .role {
+          grid-template-columns: minmax(0, 1fr);
+        }
+
+        .mobile-nav { display: block; position: relative; }
+        .mobile-nav summary {
+          cursor: pointer; list-style: none; border: 2px solid var(--ink);
+          padding: 9px 14px; font-weight: 800; background: var(--panel);
+        }
+        .mobile-nav summary::-webkit-details-marker { display: none; }
+        .mobile-nav .mobile-links {
+          position: absolute; right: 0; top: calc(100% + 8px); z-index: 30;
+          display: grid; min-width: 190px; border: 2px solid var(--ink);
+          background: var(--panel); box-shadow: 6px 6px 0 var(--ink);
+        }
+        .mobile-links a { padding: 12px 16px; font-weight: 750; }
+        .mobile-links a + a { border-top: 1px solid var(--line); }
+        .mobile-links a:focus-visible, .mobile-links a:hover { background: var(--acid); }
+
         body::before {
           display: none;
         }
@@ -1357,6 +1380,19 @@
       }
 
       @media (max-width: 620px) {
+        .nav-inner { gap: 10px; }
+        .brand { gap: 8px; font-size: 0.9rem; }
+        .mark { flex: 0 0 38px; }
+        .hero { padding: 42px 0 48px; }
+        .hero-grid { gap: 32px; }
+        section { padding: 56px 0; }
+        .section-head { gap: 16px; margin-bottom: 28px; }
+        .feature { padding: 24px; }
+        .card { padding: 28px 22px; min-height: 0; }
+        .actions .button { width: 100%; text-align: center; }
+        .contact-methods { display: grid; width: 100%; }
+        .contact-methods .button { max-width: 100%; overflow-wrap: anywhere; text-align: center; }
+        h1, h2, h3, p, li, .skill-cloud span { overflow-wrap: anywhere; }
         h1 {
           font-size: clamp(2.55rem, 12vw, 3.6rem);
         }
@@ -1411,6 +1447,15 @@
           <a href="#expertise">03 Expertise</a>
           <a href="#contact" class="contact-link">04 Contact</a>
         </div>
+        <details class="mobile-nav">
+          <summary>Menu</summary>
+          <div class="mobile-links" aria-label="Mobile navigation">
+            <a href="#clients">Clients</a>
+            <a href="#work">Work</a>
+            <a href="#expertise">Expertise</a>
+            <a href="#contact">Contact</a>
+          </div>
+        </details>
       </div>
     </nav>
 
@@ -1766,5 +1811,12 @@
     <footer>
       <div class="shell">Vipin Alakkadan · Kochi, Kerala, India · Cloud, Gen AI, application, and infrastructure architecture</div>
     </footer>
+    <script>
+      document.querySelectorAll(".mobile-links a").forEach(function (link) {
+        link.addEventListener("click", function () {
+          link.closest("details").removeAttribute("open");
+        });
+      });
+    </script>
   </body>
 </html>
